@@ -1,0 +1,152 @@
+* 00000005
+*! version 1.0.0
+* Do not erase or edit this file
+* It is used by Stata to track the ado and help
+* files you have installed.
+
+S http://www.stata-journal.com/software/sj8-2
+N gr0034.pkg
+D 14 Apr 2015
+U 1
+d SJ8-2 gr0034.  Assign values to variables
+d Assign values to variables
+d by Nicholas J. Cox, Durham University, Durham City, UK
+d Support:  n.j.cox@@durham.ac.uk
+d After installation, type help ^labmask^ and ^seqvar^
+f l\labmask.ado
+f l\labmask.hlp
+f s\seqvar.ado
+f s\seqvar.hlp
+e
+S http://fmwww.bc.edu/repec/bocode/t
+N tabstatmat.pkg
+D 14 Apr 2015
+U 2
+d 'TABSTATMAT': module to save matrices saved by tabstat to single named matrix
+d 
+d tabstatmat picks up any matrices saved after tabstat as r(Stat1),
+d etc., and possibly as r(StatTot), together with their rownames
+d saved as r(name1), etc., and puts them in a single named matrix.
+d 
+d KW: tabstat
+d KW: tables
+d KW: matrices
+d 
+d Requires: Stata version 8.0
+d 
+d 
+d Author: Austin Nichols
+d Support: email austinnichols@@gmail.com
+d 
+d Distribution-Date: 20110727
+d 
+f t\tabstatmat.ado
+f t\tabstatmat.hlp
+e
+S http://fmwww.bc.edu/repec/bocode/x
+N xml_tab.pkg
+D 14 Apr 2015
+U 3
+d 'XML_TAB': module to save results in Excel XML format
+d 
+d xml_tab saves Stata output directly into XML file that could be
+d opened with Microsoft Excel or OpenOffice Calc. The program is
+d relatively flexible and produces print-ready tables in Excel or
+d Calc. xml_tab allows users to apply different formats to the
+d elements of the output table and essentially do everything MS
+d Excel or OO Calc can do in terms of formatting from within Stata. d
+d KW: XML
+d KW: results
+d KW: output
+d KW: Excel
+d 
+d Requires: Stata version 8 and MS Excel (EN) 2002 for Windows, MS Excel 2004 for Mac, or OpenOffice Calc
+d 
+d Distribution-Date: 20080625
+d 
+d Author: Michael Lokshin, World Bank
+d Support: email Mlokshin@@worldbank.org
+d 
+d Author: Zurab Sajaia, World Bank
+d Support: email
+d 
+f x\xml_tab.ado
+f x\xml_tab.hlp
+e
+S http://fmwww.bc.edu/repec/bocode/o
+N outreg2.pkg
+D 14 Apr 2015
+U 4
+d 'OUTREG2': module to arrange regression outputs into an illustrative table
+d 
+d  outreg2 provides a fast and easy way to produce an illustrative
+d table  of regression outputs. The regression outputs are produced
+d piecemeal and are  difficult to compare without some type of
+d rearrangement. outreg2  automates this process by concatenating
+d the successive regression outputs in a  vertical format. The
+d resulting table is saved to the disk in ASCII  format, which can
+d be read by other programs. outreg2 thus facilitates  the
+d convertion of regression outputs to a standard format suitable
+d for  inclusion in a scholarly publication. The functionality of
+d outreg2 is based on the earlier package outreg,  by John Luke
+d Gallup. Unlike outreg, outreg2 is capable of writing LaTeX-format
+d tables, as well as ASCII, MS Word and MS Excel.
+d 
+d KW: regression
+d KW: output
+d KW: tables
+d KW: tab-delimited output
+d KW: LaTeX
+d KW: Word
+d KW: Excel
+d 
+d Requires: Stata version 7
+d 
+d Distribution-Date: 20140817
+d 
+d Author: Roy Wada
+d Support: email roywada@@hotmail.com
+d 
+f o\outreg2.ado
+f o\outreg2_prf.ado
+f o\outreg2.hlp
+f s\shellout.ado
+f s\shellout.hlp
+f s\seeout.ado
+f s\seeout.hlp
+e
+S http://fmwww.bc.edu/repec/bocode/t
+N tabout.pkg
+D 15 Apr 2015
+U 5
+d 'TABOUT': module to export publication quality cross-tabulations
+d 
+d  tabout is a table building program for oneway and twoway
+d tables of frequencies and percentages, and for summary tables. It
+d produces publication quality tables for export to a text file.
+d These tables can then be used with spreadsheets, word processors,
+d web browsers or compilers like LaTeX. The tables produced by
+d tabout allow multiple panels so that a number of variables can be
+d included in the one table. tabout also provides standard errors
+d and confidence intervals, as well as a range of table statistics
+d (chi2 etc). The output from tabout matches Stata's tabulate, most
+d of tabstat and some of table.
+d 
+d KW: tables
+d KW: latex
+d KW: html
+d KW: delimited text
+d 
+d Requires: Stata version 9.2
+d 
+d Distribution-Date: 20150112
+d 
+d Author: Ian Watson , Macquarie University, Australia
+d Support: email mail@@ianwatson.com.au
+d 
+f t\tabout.ado
+f t\tabstatout.ado
+f t\tabout.hlp
+f f\figout.ado
+f f\figout.hlp
+e
