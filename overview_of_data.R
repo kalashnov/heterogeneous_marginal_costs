@@ -2,7 +2,7 @@ library(dplyr)
 library(grf)
 library(ggplot2)
 
-setwd("~/Optimal policy")
+setwd("~/heterogeneous_marginal_costs")
 source('marginal_learning.R')
 source('datasets.R')
 

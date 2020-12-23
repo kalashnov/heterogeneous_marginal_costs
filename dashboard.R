@@ -6,7 +6,7 @@ library(plotly)
 library(memoise)
 set.seed(0)
 
-setwd("~/Optimal policy")
+setwd("~/heterogeneous_marginal_costs")
 source('imitation.R')
 
 caluclate_sliders <- function(data) {
@@ -45,6 +45,11 @@ caluclate_sliders <- function(data) {
 
 sliders <- caluclate_sliders(sanitation_data)
 
+df <- expand.grid(0:6 * sliders$levels_cpred_1, 0:6 * sliders$levels_cpred_2, 0:6 * sliders$levels_Y1_resid, 0:6 * sliders$levels_Y2_resid)
+for (row in 1:nrow(df)) {
+  get_sanitation_figures(df[row, 1], df[row, 2], df[row, 3], df[row, 4])
+  print(c(df[row, 1], df[row, 2], df[row, 3], df[row, 4]))
+}
 
 # parameters: sliders for options + labels
 # switch off and on the models
@@ -102,7 +107,7 @@ app$layout(
   htmlDiv(list(
     pageTitle,
     pageSubTitle,
-    pageParagraphs,
+#    pageParagraphs,
     dccGraph(id = 'sanitation-graph'),
     dccGraph(id = 'FE-graph'),
     dccMarkdown("Note, that you can swith off one of the models by clicking on it's name in the legend"),
@@ -166,5 +171,5 @@ app$callback(
   }
 )
 
-app$run_server()
+app$run_server(host='91.201.40.160', port='80')
 
