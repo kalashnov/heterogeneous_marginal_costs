@@ -127,3 +127,28 @@ prepare_immunization_data <- function() {
   list(pretreatment_vars=pretreatment_vars, Y2=Y2, Y1=Y1, cluster=cluster, treatment=treatment, stratify_data=stratify_data)
 }
 
+
+prepare_immunization_data <- function() {
+  final_data <- read.dta13('dataverse_/imm_mergedwHHandBaseline.dta')
+  complete <- final_data[!is.na(final_data$complete1to3),]
+  Y2 <- (4) * complete$treat3 * complete$complete1to3 + complete$d2_5 # costs
+  Y1 <- complete$complete1to3
+  treatment <- complete$treat3
+  X <- complete %>% select(matches('^d.*__1$'))
+  X <- X[,sapply(X, mode) != 'character']
+  X <- X[,sapply(X, function (x) {sum(is.na(x)) != length(x)})]
+  X[is.na(X)] <- -100000
+  pretreatment_vars <- X
+  cluster <- as.numeric(rownames(complete))
+  stratify_data <- data.frame(treatment=treatment, cid=cluster)
+  list(pretreatment_vars=pretreatment_vars, Y2=Y2, Y1=Y1, cluster=cluster, treatment=treatment, stratify_data=stratify_data)
+}
+
+
+prepare_school_data <- function() {
+  final_data <- read.csv('Dufflo_exp/Dufflo_data.csv')
+  stratify_data <- data.frame(treatment=final_data$treatment, cid=final_data$schoolid) # $1:length(
+  pretreatment_vars <- final_data[c('girl', 'std_mark',	'realpercentile',	'kcpe2001',	'kcpe2004',	'total_2004',	'rotation',	'total1_2005',	'streams1_2005',	'init_clsize',	'Nteachers',	'gradesize'	,'schoolsize')]
+  list(pretreatment_vars=pretreatment_vars, Y2=final_data$treatment, Y1=final_data$Y1, cluster=final_data$schoolid, treatment=final_data$treatment, stratify_data=stratify_data)
+}
+

@@ -37,8 +37,7 @@ stat_cumulative <- function(mapping = NULL, data = NULL, geom = "line",
 build_models <- function(data, group=c('treatment'), size=0.5, best_factor=0.5, variable_importance_th = 0) {
   # ADD KALLUS, ADD DUFLO/CHERNOZUKOV
   attach(data)
-  train_ind <- as.integer(stratified(stratify_data, group=group, size=size)$cid)
-  
+  train_ind <- as.integer(stratified(distinct(stratify_data), group=group, size=size)$cid)
   forest <- instrumental_forest(pretreatment_vars[cluster %in% train_ind,], Y1[cluster %in% train_ind], Y2[cluster %in% train_ind], treatment[cluster %in% train_ind], cluster=cluster[cluster %in% train_ind])#, tune.parameters = 'all')
   if (variable_importance_th > 0) {
     pretreatment_vars <- pretreatment_vars[,variable_importance(forest) > variable_importance_th]
@@ -50,13 +49,13 @@ build_models <- function(data, group=c('treatment'), size=0.5, best_factor=0.5, 
   cforest_2 <- causal_forest(pretreatment_vars[cluster %in% train_ind,], Y2[cluster %in% train_ind], treatment[cluster %in% train_ind], cluster=cluster[cluster %in% train_ind])#, tune.parameters = 'all')
   cforest_regr <- causal_forest(pretreatment_vars[cluster %in% train_ind,], Y1[cluster %in% train_ind] - best_factor*Y2[cluster %in% train_ind], treatment[cluster %in% train_ind], cluster=cluster[cluster %in% train_ind])#, tune.parameters = 'all')
   
-  
-  
   predictions <- predict(forest, pretreatment_vars[!cluster %in% train_ind,])$predictions
   cpredictions_1 <- predict(cforest_1, pretreatment_vars[!cluster %in% train_ind,])$predictions # pass data
   cpredictions_2 <- predict(cforest_2, pretreatment_vars[!cluster %in% train_ind,])$predictions
   cpredictions_regr <- predict(cforest_regr, pretreatment_vars[!cluster %in% train_ind,])$predictions
   
   cpredictions <- cpredictions_1/cpredictions_2
-  data.frame(predictions=predictions, cpredictions_2=cpredictions_2, cpredictions_regr=cpredictions_regr, cpredictions_1=cpredictions_1, cpredictions=cpredictions, Y1=Y1[!cluster %in% train_ind], Y2=Y2[!cluster %in% train_ind], W=treatment[!cluster %in% train_ind], random=runif(length(Y1[!cluster %in% train_ind]),0,1))
+  retval <- data.frame(predictions=predictions, cpredictions_2=cpredictions_2, cpredictions_regr=cpredictions_regr, cpredictions_1=cpredictions_1, cpredictions=cpredictions, Y1=Y1[!cluster %in% train_ind], Y2=Y2[!cluster %in% train_ind], W=treatment[!cluster %in% train_ind], random=runif(length(Y1[!cluster %in% train_ind]),0,1))
+  detach(data)
+  retval
 }

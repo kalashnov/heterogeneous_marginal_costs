@@ -2,7 +2,7 @@ library(dplyr)
 library(grf)
 library(ggplot2)
 
-setwd("~/heterogeneous_marginal_costs")
+# setwd("~/heterogeneous_marginal_costs")
 source('marginal_learning.R')
 source('datasets.R')
 
